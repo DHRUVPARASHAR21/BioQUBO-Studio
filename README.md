@@ -8,6 +8,8 @@ BioQUBO Studio is a free, local-first computational-biology optimization workben
 
 The **Protein inputs** page accepts local UTF-8 FASTA, PDB, and mmCIF files. It validates sequences, retains first-model standard residues with alpha-carbon coordinates, and records a SHA-256 checksum in local provenance. It does not send file contents over the network.
 
+For a local structure, the same page can build a non-sequential alpha-carbon contact network at a user-selected cutoff and use a fixed-cardinality local BQM to select high-connectivity residues. This is an inspectable network-analysis experiment, not structural prediction or a biological importance claim.
+
 ## Principles
 
 - No cloud QPU, paid API, or account is required for default workflows.

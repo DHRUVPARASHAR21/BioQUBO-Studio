@@ -6,6 +6,8 @@ import streamlit as st
 
 from bioqubo.io.fasta import parse_fasta_text
 from bioqubo.io.structure import parse_structure_text
+from bioqubo.residue_network import build_residue_network
+from bioqubo.residue_selection_bqm import build_residue_selection_bqm, solve_residue_selection
 
 
 def render_protein_inputs_page() -> None:
@@ -57,3 +59,30 @@ def render_protein_inputs_page() -> None:
                         "checksum": parsed.provenance.checksum,
                     }
                 )
+                cutoff = st.number_input("CA contact cutoff (Å)", 2.0, 20.0, 8.0, 0.5)
+                network = build_residue_network(parsed, float(cutoff))
+                st.caption(f"Local residue network: {len(network.edges)} non-sequential contacts.")
+                count = st.number_input(
+                    "Residues to select", 1, len(network.residues), min(3, len(network.residues))
+                )
+                if st.button("Select connected residues locally"):
+                    result = solve_residue_selection(
+                        build_residue_selection_bqm(network, int(count)), reads=100, seed=123
+                    )
+                    if result is None:
+                        st.error("No valid fixed-size residue selection was returned.")
+                    else:
+                        st.success("Selected residues after independent cardinality verification.")
+                        st.dataframe(
+                            [
+                                {
+                                    "chain": network.residues[index].chain_id,
+                                    "residue": network.residues[index].residue_name,
+                                    "number": network.residues[index].residue_number,
+                                    "network_degree": network.degree(index),
+                                }
+                                for index in result.selected_indices
+                            ],
+                            hide_index=True,
+                            width="stretch",
+                        )

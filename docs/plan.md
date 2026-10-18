@@ -43,9 +43,9 @@ evidence, reproducible JSON/CSV exports, and a Streamlit design page.
 
 Proposed modules: `io/fasta.py`, `io/structure.py`, `fetch/uniprot.py`, `fetch/rcsb.py`, `residue_network.py`, `residue_selection_bqm.py`.
 
-**Status: input layer in progress 18 October 2026.** Offline FASTA and PDB/mmCIF parsing,
-local provenance, and input summaries are available. Residue-network optimization and optional
-explicit retrieval remain outstanding.
+**Status: local workflows completed 18 October 2026.** Offline FASTA and PDB/mmCIF parsing,
+local provenance, residue-contact networks, and a fixed-cardinality local residue-selection BQM are
+available. Optional explicit UniProt/RCSB retrieval remains deferred so default workflows stay offline.
 
 ## Milestone 4 — Molecular-library workflow
 
