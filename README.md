@@ -2,7 +2,7 @@
 
 BioQUBO Studio is a free, local-first computational-biology optimization workbench built with D-Wave's Ocean SDK and local solvers.
 
-> **Status: Milestone 0 foundation.** This version establishes reproducibility and offline verification infrastructure. It does not yet implement protein folding, structure analysis, molecular prioritization, docking, affinity prediction, efficacy prediction, or clinical decision support.
+> **Status: Milestone 1 HP lattice folding.** This version adds a local 2D HP-model folding experiment. It does not provide atomistic protein-structure prediction, structure analysis, molecular prioritization, docking, affinity prediction, efficacy prediction, or clinical decision support.
 
 ## Principles
 
@@ -36,7 +36,11 @@ python -m bioqubo.offline_demo
 streamlit run app.py
 ```
 
-The offline demo reads only the bundled JSON example and creates a versioned result envelope. It makes no network request and does not perform biological optimization.
+The offline demo reads only the bundled JSON example and creates a versioned result envelope. The Streamlit HP page uses local `neal` or `tabu` sampling and independently validates every displayed self-avoiding fold. The HP model is a coarse-grained lattice experiment, not a real-world structure prediction.
+
+## HP lattice folding
+
+The folding page accepts `H`/`P` sequences (or a one-record FASTA-like input), creates a finite 2D square-lattice BQM, and runs a local Ocean solver. The representation follows the distributed lattice-site approach of Irbäck et al., *Folding lattice proteins with quantum annealing*, Phys. Rev. Research 4, 043013 (2022), [DOI: 10.1103/PhysRevResearch.4.043013](https://doi.org/10.1103/PhysRevResearch.4.043013). Independent geometry checks reject invalid sampler outputs; the displayed energy is always recomputed as `-N_HH` from non-bonded nearest-neighbour H–H contacts.
 
 ## Project documentation
 
