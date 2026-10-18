@@ -19,10 +19,10 @@ network connection during normal workflows.
 
 | Journey | Expected outcome | Automated evidence |
 | --- | --- | --- |
-| HP folding | Validated local fold and independently recomputed H-H energy | Folding tests and app smoke test |
+| HP folding | Validated local fold, independently recomputed H-H energy, and reproducible JSON/CSV export | Folding and export tests; app smoke test |
 | Inverse HP design | Fixed-composition designs with separate re-folding evidence | Inverse-design tests |
 | Protein input | Local FASTA/PDB/mmCIF parsing with checksum provenance | Input-parser tests |
-| Residue selection | Fixed-size, independently scored local contact-network selection | Residue-selection tests |
+| Residue selection | Fixed-size, independently scored local contact-network selection with source-file provenance JSON/CSV export | Residue-selection and export tests |
 | Molecule prioritization | Valid local SMILES, filtered fixed-size diverse shortlist | Chemistry and shortlist tests |
 
 ## Known limitations
@@ -33,6 +33,16 @@ network connection during normal workflows.
   included in this release.
 - Manual accessibility, responsive-browser, and packaged-install checks remain
   required before distributing a public binary release.
+
+## Export evidence
+
+HP-folding and residue-network-selection downloads are paired JSON and CSV
+artifacts. The JSON artifact is the complete result envelope. The CSV repeats
+the schema version, workflow status, timestamp, software version, random seed,
+and canonical JSON provenance, configuration, and payload fields on every
+data row so it remains reproducible when separated from the JSON artifact.
+The payload retains the independently evaluated result and the applicable
+coarse-grained or non-clinical limitation.
 
 ## Rollback
 

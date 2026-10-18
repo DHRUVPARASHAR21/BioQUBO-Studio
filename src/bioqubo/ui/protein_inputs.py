@@ -4,8 +4,11 @@ from __future__ import annotations
 
 import streamlit as st
 
+from bioqubo.exports import build_result_exports
 from bioqubo.io.fasta import parse_fasta_text
 from bioqubo.io.structure import parse_structure_text
+from bioqubo.models import ResultEnvelope, ResultStatus
+from bioqubo.offline_demo import software_version
 from bioqubo.residue_network import build_residue_network
 from bioqubo.residue_selection_bqm import build_residue_selection_bqm, solve_residue_selection
 
@@ -65,9 +68,20 @@ def render_protein_inputs_page() -> None:
                 count = st.number_input(
                     "Residues to select", 1, len(network.residues), min(3, len(network.residues))
                 )
+                selection_controls = st.columns(3)
+                solver = selection_controls[0].selectbox(
+                    "Local solver", ["neal", "tabu"], key="residue_selection_solver"
+                )
+                reads = selection_controls[1].number_input(
+                    "Selection reads", 1, 500, 100, 10, key="residue_selection_reads"
+                )
+                seed = selection_controls[2].number_input(
+                    "Selection random seed", 0, value=123, step=1, key="residue_selection_seed"
+                )
                 if st.button("Select connected residues locally"):
+                    encoding = build_residue_selection_bqm(network, int(count))
                     result = solve_residue_selection(
-                        build_residue_selection_bqm(network, int(count)), reads=100, seed=123
+                        encoding, solver=solver, reads=int(reads), seed=int(seed)
                     )
                     if result is None:
                         st.error("No valid fixed-size residue selection was returned.")
@@ -85,4 +99,62 @@ def render_protein_inputs_page() -> None:
                             ],
                             hide_index=True,
                             width="stretch",
+                        )
+                        rows = [
+                            {
+                                "selected_index": index,
+                                "chain": network.residues[index].chain_id,
+                                "residue": network.residues[index].residue_name,
+                                "residue_number": network.residues[index].residue_number,
+                                "insertion_code": network.residues[index].insertion_code,
+                                "coordinate": network.residues[index].coordinate,
+                                "network_degree": network.degree(index),
+                            }
+                            for index in result.selected_indices
+                        ]
+                        envelope = ResultEnvelope(
+                            workflow="residue_network_selection",
+                            status=ResultStatus.SUCCESS,
+                            provenance=parsed.provenance,
+                            configuration={
+                                "network_access": False,
+                                "contact_cutoff_angstrom": float(cutoff),
+                                "selection_count": int(count),
+                                "solver": solver,
+                                "reads": int(reads),
+                                "cardinality_strength": encoding.cardinality_strength,
+                                "bqm_variables": len(encoding.bqm.variables),
+                            },
+                            payload={
+                                "structure_id": parsed.structure_id,
+                                "structure_format": parsed.format,
+                                "residue_count": len(network.residues),
+                                "network_edges": network.edges,
+                                "selected_indices": result.selected_indices,
+                                "independently_evaluated_degree_score": result.objective_score,
+                                "bqm_energy": result.bqm_energy,
+                                "valid_samples": result.valid_samples,
+                                "invalid_samples": result.invalid_samples,
+                                "limitation": (
+                                    "Residue-network selection is a local contact-network "
+                                    "analysis, "
+                                    "not structural prediction or a biological importance claim."
+                                ),
+                            },
+                            random_seed=int(seed),
+                            software_version=software_version(),
+                        )
+                        exports = build_result_exports(envelope, rows)
+                        json_column, csv_column = st.columns(2)
+                        json_column.download_button(
+                            "Download selection JSON",
+                            data=exports.json_text,
+                            file_name="bioqubo_residue_selection.json",
+                            mime="application/json",
+                        )
+                        csv_column.download_button(
+                            "Download selected residues CSV",
+                            data=exports.csv_text,
+                            file_name="bioqubo_residue_selection.csv",
+                            mime="text/csv",
                         )

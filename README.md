@@ -8,7 +8,7 @@ BioQUBO Studio is a free, local-first computational-biology optimization workben
 
 The **Protein inputs** page accepts local UTF-8 FASTA, PDB, and mmCIF files. It validates sequences, retains first-model standard residues with alpha-carbon coordinates, and records a SHA-256 checksum in local provenance. It does not send file contents over the network.
 
-For a local structure, the same page can build a non-sequential alpha-carbon contact network at a user-selected cutoff and use a fixed-cardinality local BQM to select high-connectivity residues. This is an inspectable network-analysis experiment, not structural prediction or a biological importance claim.
+For a local structure, the same page can build a non-sequential alpha-carbon contact network at a user-selected cutoff and use a fixed-cardinality local BQM to select high-connectivity residues. This is an inspectable network-analysis experiment, not structural prediction or a biological importance claim. HP-folding and residue-selection result downloads include paired JSON and CSV exports; both preserve source provenance, configuration, seed, software version, and the independently evaluated result.
 
 ## Principles
 
@@ -42,7 +42,7 @@ python -m bioqubo.offline_demo
 streamlit run app.py
 ```
 
-The offline demo reads only the bundled JSON example and creates a versioned result envelope. The Streamlit HP page uses local `neal` or `tabu` sampling and independently validates every displayed self-avoiding fold. The HP model is a coarse-grained lattice experiment, not a real-world structure prediction.
+The offline demo reads only the bundled JSON example and creates a versioned result envelope. The Streamlit HP page uses local `neal` or `tabu` sampling and independently validates every displayed self-avoiding fold. Its JSON/CSV downloads record the manual-input checksum, local solver configuration and seed, lattice settings, BQM measurements, independently evaluated energy, and coarse-grained limitation. The HP model is a coarse-grained lattice experiment, not a real-world structure prediction.
 
 ## HP lattice folding
 

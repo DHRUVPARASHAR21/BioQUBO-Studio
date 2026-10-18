@@ -2,10 +2,16 @@
 
 from __future__ import annotations
 
+import hashlib
+
 import streamlit as st
 
+from bioqubo.exports import build_result_exports
 from bioqubo.folding_bqm import LatticeBounds, build_folding_bqm
 from bioqubo.hp_model import HPSequenceError, parse_hp_sequence
+from bioqubo.models import ResultEnvelope, ResultStatus
+from bioqubo.offline_demo import software_version
+from bioqubo.provenance import DataProvenance, SourceKind
 from bioqubo.solvers import solve_folding
 from bioqubo.visualization.fold import fold_svg
 
@@ -72,3 +78,62 @@ def render_folding_page() -> None:
                     "independent_hp_energy": result.evaluation.energy,
                 }
             )
+        provenance = DataProvenance(
+            source_kind=SourceKind.MANUAL_ENTRY,
+            source_name="Manual HP sequence",
+            identifier="manual-hp-sequence",
+            checksum=f"sha256:{hashlib.sha256(sequence.residues.encode()).hexdigest()}",
+            notes=(
+                "Coarse-grained HP lattice input entered locally; no external retrieval was used."
+            ),
+        )
+        envelope = ResultEnvelope(
+            workflow="hp_lattice_folding",
+            status=ResultStatus.SUCCESS,
+            provenance=provenance,
+            configuration={
+                "network_access": False,
+                "solver": solver,
+                "reads": int(reads),
+                "lattice": {"width": int(width), "height": int(height)},
+                "bqm_variables": len(encoding.bqm.variables),
+            },
+            payload={
+                "hp_sequence": sequence.residues,
+                "coordinates": result.chain.coordinates,
+                "nonbonded_hydrophobic_contacts": result.evaluation.contacts,
+                "independently_evaluated_hp_energy": result.evaluation.energy,
+                "bqm_energy": result.bqm_energy,
+                "valid_samples": result.valid_samples,
+                "invalid_samples": result.invalid_samples,
+                "limitation": "Coarse-grained 2D HP-model result; not an atomistic prediction.",
+            },
+            random_seed=int(seed),
+            software_version=software_version(),
+        )
+        rows = [
+            {
+                "residue_index": index,
+                "residue_type": residue,
+                "x": coordinate[0],
+                "y": coordinate[1],
+                "nonbonded_hydrophobic_contacts": result.evaluation.contacts,
+            }
+            for index, (residue, coordinate) in enumerate(
+                zip(sequence.residues, result.chain.coordinates, strict=True)
+            )
+        ]
+        exports = build_result_exports(envelope, rows)
+        json_column, csv_column = st.columns(2)
+        json_column.download_button(
+            "Download result JSON",
+            data=exports.json_text,
+            file_name="bioqubo_hp_folding.json",
+            mime="application/json",
+        )
+        csv_column.download_button(
+            "Download coordinates CSV",
+            data=exports.csv_text,
+            file_name="bioqubo_hp_folding.csv",
+            mime="text/csv",
+        )
