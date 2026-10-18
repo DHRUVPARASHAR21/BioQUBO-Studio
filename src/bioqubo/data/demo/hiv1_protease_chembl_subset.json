@@ -1,0 +1,23 @@
+{
+  "title": "HIV-1 protease teaching subset",
+  "purpose": "A four-record local input example for BioQUBO Studio's molecular-library prioritization workflow. It is not an activity, potency, docking, affinity, efficacy, safety, or clinical dataset.",
+  "target_context": {
+    "pdb_accession": "1HSG",
+    "source_url": "https://www.rcsb.org/structure/1HSG",
+    "description": "HIV-1 protease structure; accession is included as teaching context only and is not used by the molecular-prioritization algorithm. No PDB coordinate file is bundled."
+  },
+  "source": {
+    "provider": "ChEMBL",
+    "accessed": "2026-10-18",
+    "method": "Individual molecule records retrieved from the public ChEMBL web API by name; canonical SMILES and ChEMBL identifiers retained.",
+    "license": "CC BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "attribution_url": "https://www.ebi.ac.uk/chembl/"
+  },
+  "records": [
+    {"identifier": "CHEMBL1735", "queried_name": "indinavir"},
+    {"identifier": "CHEMBL4575419", "queried_name": "saquinavir"},
+    {"identifier": "CHEMBL3114713", "queried_name": "ritonavir"},
+    {"identifier": "CHEMBL1201127", "queried_name": "darunavir"}
+  ]
+}

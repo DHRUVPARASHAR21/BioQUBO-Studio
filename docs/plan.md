@@ -57,8 +57,8 @@ Proposed modules: `io/molecules.py`, `chemistry.py`, `molecule_selection_bqm.py`
 
 **Status: core workflow completed 18 October 2026.** Local SMILES entry, descriptor calculation,
 property filtering, fixed-cardinality diversity selection, local `neal`/`tabu` solving, and
-JSON/CSV result downloads are available. CSV/SDF import and the attributed ChEMBL example set remain
-release-completion work.
+JSON/CSV result downloads are available. Local CSV/SDF import and a separately
+attributed ChEMBL teaching subset are complete.
 
 ## Milestone 5 — Product integration and release readiness
 
@@ -70,8 +70,9 @@ Proposed modules: `app.py`, `ui/`, `docs/`, `tests/integration/`.
 
 **Status: in progress 18 October 2026.** Integrated headless app smoke coverage,
 reproducible workflow exports, a local session result-history/export view, and
-release-readiness documentation are in place; manual browser/accessibility and
-packaged-install checks remain before a public binary release.
+release-readiness documentation are in place. Wheel-install verification is
+part of the final local release commands; manual browser/accessibility review
+remains before a public binary release.
 
 ## Verification strategy
 

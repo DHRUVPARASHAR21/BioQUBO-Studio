@@ -9,7 +9,7 @@ network connection during normal workflows.
 
 ## Automated evidence
 
-- `python -m pytest`: parser, evaluator, BQM, solver, and integrated app-load
+- `python -m pytest`: parser, evaluator, BQM, solver, import, and integrated app-load
   smoke tests.
 - `ruff check .`: source-quality gate.
 - `python -m bioqubo.offline_demo`: provenance/result-envelope smoke test.
@@ -23,7 +23,7 @@ network connection during normal workflows.
 | Inverse HP design | Fixed-composition designs with separate re-folding evidence | Inverse-design tests |
 | Protein input | Local FASTA/PDB/mmCIF parsing with checksum provenance | Input-parser tests |
 | Residue selection | Fixed-size, independently scored local contact-network selection with source-file provenance JSON/CSV export | Residue-selection and export tests |
-| Molecule prioritization | Valid local SMILES, filtered fixed-size diverse shortlist | Chemistry and shortlist tests |
+| Molecule prioritization | Valid local SMILES/CSV/SDF, filtered fixed-size diverse shortlist, and attributed offline demo | Chemistry, import, shortlist, and export tests |
 
 ## Known limitations
 
@@ -31,8 +31,22 @@ network connection during normal workflows.
   molecule shortlists are not docking, affinity, efficacy, or clinical results.
 - Default workflows are local. Optional remote retrieval is intentionally not
   included in this release.
-- Manual accessibility, responsive-browser, and packaged-install checks remain
-  required before distributing a public binary release.
+- A keyboard/screen-reader review and a small-viewport review remain required
+  before distributing a public binary release. A wheel-install smoke check is
+  part of the release commands below.
+
+## Final local release commands
+
+```powershell
+python -m pytest
+ruff check .
+python -m bioqubo.offline_demo
+python -m pip wheel . --no-deps --wheel-dir dist
+```
+
+Install the generated wheel in a fresh local virtual environment, then run
+`streamlit run app.py`. Do not publish a binary release until the manual
+keyboard and small-viewport checks have also been recorded.
 
 ## Export evidence
 

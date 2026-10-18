@@ -2,7 +2,7 @@
 
 BioQUBO Studio is a free, local-first computational-biology optimization workbench built with D-Wave's Ocean SDK and local solvers.
 
-> **Status: Milestone 4 core workflow complete; release readiness in progress.** This version adds local FASTA/PDB/mmCIF inspection, 2D HP-model folding, inverse design, and SMILES-based molecular-library prioritization. It does not provide atomistic protein-structure prediction, real-protein design, docking, affinity prediction, efficacy prediction, or clinical decision support.
+> **Status: Milestones 0–4 complete; release QA in progress.** This version adds local FASTA/PDB/mmCIF inspection, 2D HP-model folding, inverse design, and molecular-library prioritization. It does not provide atomistic protein-structure prediction, real-protein design, docking, affinity prediction, efficacy prediction, or clinical decision support.
 
 ## Local protein inputs
 
@@ -54,9 +54,9 @@ The inverse-design page accepts a valid target lattice chain, holds the H/P comp
 
 ## Molecular-library prioritization
 
-The **Molecule prioritization** page accepts a small, locally entered SMILES library with optional identifiers. It calculates local descriptors, applies molecular-weight and logP filters, and uses a fixed-size diversity-aware BQM solved by `neal` or `tabu` to select a shortlist. The page displays all eligible inputs and provides JSON/CSV result downloads with solver configuration and local provenance.
+The **Molecule prioritization** page accepts a locally entered SMILES library, a UTF-8 CSV with a SMILES column, or an SDF file. It calculates local descriptors, applies molecular-weight and logP filters, and uses a fixed-size diversity-aware BQM solved by `neal` or `tabu` to select a shortlist. The page displays all eligible inputs and provides JSON/CSV result downloads with solver configuration and local provenance.
 
-This workflow is a transparent library-prioritization experiment. It is not molecular docking, binding-affinity prediction, efficacy assessment, or clinical advice. CSV/SDF library import and an attributed bundled ChEMBL demonstration set remain planned release-completion work.
+This workflow is a transparent library-prioritization experiment. It is not molecular docking, binding-affinity prediction, efficacy assessment, or clinical advice. A four-record, attributed ChEMBL teaching subset is bundled as an offline HIV-1 protease (PDB 1HSG) context demo; the structure is not used for scoring. See [bundled-data attribution](docs/data-attribution.md) for the data's separate CC BY-SA 3.0 terms.
 
 ## Project documentation
 
@@ -64,6 +64,7 @@ This workflow is a transparent library-prioritization experiment. It is not mole
 - [`docs/spec.md`](docs/spec.md): user-facing requirements and acceptance criteria.
 - [`docs/plan.md`](docs/plan.md): milestone plan and verification strategy.
 - [`docs/release-readiness.md`](docs/release-readiness.md): local release gates and limitations.
+- [`docs/data-attribution.md`](docs/data-attribution.md): license and provenance for the bundled teaching data.
 
 ## License
 

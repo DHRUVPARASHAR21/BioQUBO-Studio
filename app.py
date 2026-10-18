@@ -14,7 +14,7 @@ from bioqubo.ui.result_history import render_result_history_page
 st.set_page_config(page_title="BioQUBO Studio", page_icon="🧬", layout="wide")
 
 st.title("BioQUBO Studio")
-st.caption("Local-first computational-biology optimization — Milestone 3 input layer")
+st.caption("Local-first computational-biology optimization — Milestones 0–4 complete")
 
 st.info("No cloud QPU, credentials, or network connection is needed for the available workflows.")
 

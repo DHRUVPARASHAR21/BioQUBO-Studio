@@ -10,11 +10,12 @@ import dimod
 import neal
 import tabu
 from rdkit import Chem, DataStructs
-from rdkit.Chem import AllChem
+from rdkit.Chem import rdFingerprintGenerator
 
 from bioqubo.chemistry import Molecule
 
 SelectionSolver = Literal["neal", "tabu"]
+_MORGAN_GENERATOR = rdFingerprintGenerator.GetMorganGenerator(radius=2, fpSize=1024)
 
 
 @dataclass(frozen=True, slots=True)
@@ -31,12 +32,8 @@ class MoleculeSelectionEncoding:
 
 
 def _similarity(first: Molecule, second: Molecule) -> float:
-    first_fp = AllChem.GetMorganFingerprintAsBitVect(
-        Chem.MolFromSmiles(first.smiles), 2, nBits=1024
-    )
-    second_fp = AllChem.GetMorganFingerprintAsBitVect(
-        Chem.MolFromSmiles(second.smiles), 2, nBits=1024
-    )
+    first_fp = _MORGAN_GENERATOR.GetFingerprint(Chem.MolFromSmiles(first.smiles))
+    second_fp = _MORGAN_GENERATOR.GetFingerprint(Chem.MolFromSmiles(second.smiles))
     return float(DataStructs.TanimotoSimilarity(first_fp, second_fp))
 
 
