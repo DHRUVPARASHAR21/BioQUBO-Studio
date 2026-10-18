@@ -6,11 +6,12 @@ import streamlit as st
 
 from bioqubo.offline_demo import run_offline_check
 from bioqubo.ui.folding import render_folding_page
+from bioqubo.ui.inverse_design import render_inverse_design_page
 
 st.set_page_config(page_title="BioQUBO Studio", page_icon="🧬", layout="wide")
 
 st.title("BioQUBO Studio")
-st.caption("Local-first computational-biology optimization — Milestone 1")
+st.caption("Local-first computational-biology optimization — Milestone 2")
 
 st.info("No cloud QPU, credentials, or network connection is needed for the available workflows.")
 
@@ -25,9 +26,13 @@ with right:
         "They will not provide docking, affinity, efficacy, or clinical claims."
     )
 
-folding_tab, foundation_tab = st.tabs(["HP lattice folding", "Foundation check"])
+folding_tab, design_tab, foundation_tab = st.tabs(
+    ["HP lattice folding", "Inverse HP design", "Foundation check"]
+)
 with folding_tab:
     render_folding_page()
+with design_tab:
+    render_inverse_design_page()
 with foundation_tab:
     st.subheader("Offline foundation check")
     st.write("Load the bundled example and create a reproducible result envelope.")

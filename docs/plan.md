@@ -20,6 +20,9 @@ Proposed modules: `src/bioqubo/provenance.py`, `src/bioqubo/models.py`, `tests/`
 
 Proposed modules: `hp_model.py`, `folding_bqm.py`, `fold_validation.py`, `solvers.py`, `visualization/fold.py`.
 
+**Status: completed 18 October 2026.** Includes local `neal` and `tabu` folding, independent
+geometry/contact validation, an exhaustive short-case benchmark, and a Streamlit folding page.
+
 ## Milestone 2 — Inverse lattice design
 
 - Implement target-fold editor/import format and target-contact evaluation.
@@ -27,6 +30,10 @@ Proposed modules: `hp_model.py`, `folding_bqm.py`, `fold_validation.py`, `solver
 - Re-fold candidates, calculate recovery evidence, and export ranked designs.
 
 Proposed modules: `inverse_design.py`, `target_fold.py`.
+
+**Status: completed 18 October 2026.** Includes target-fold coordinate parsing, fixed-composition
+sequence-design BQMs, local solvers, independent target-contact evaluation, re-folding recovery
+evidence, reproducible JSON/CSV exports, and a Streamlit design page.
 
 ## Milestone 3 — Real protein sequence and structure workflows
 

@@ -2,7 +2,7 @@
 
 BioQUBO Studio is a free, local-first computational-biology optimization workbench built with D-Wave's Ocean SDK and local solvers.
 
-> **Status: Milestone 1 HP lattice folding.** This version adds a local 2D HP-model folding experiment. It does not provide atomistic protein-structure prediction, structure analysis, molecular prioritization, docking, affinity prediction, efficacy prediction, or clinical decision support.
+> **Status: Milestone 2 HP lattice folding and inverse design.** This version adds local 2D HP-model folding and target-fold sequence-design experiments. It does not provide atomistic protein-structure prediction, real-protein design, structure analysis, molecular prioritization, docking, affinity prediction, efficacy prediction, or clinical decision support.
 
 ## Principles
 
@@ -41,6 +41,10 @@ The offline demo reads only the bundled JSON example and creates a versioned res
 ## HP lattice folding
 
 The folding page accepts `H`/`P` sequences (or a one-record FASTA-like input), creates a finite 2D square-lattice BQM, and runs a local Ocean solver. The representation follows the distributed lattice-site approach of Irbäck et al., *Folding lattice proteins with quantum annealing*, Phys. Rev. Research 4, 043013 (2022), [DOI: 10.1103/PhysRevResearch.4.043013](https://doi.org/10.1103/PhysRevResearch.4.043013). Independent geometry checks reject invalid sampler outputs; the displayed energy is always recomputed as `-N_HH` from non-bonded nearest-neighbour H–H contacts.
+
+## Inverse HP design
+
+The inverse-design page accepts a valid target lattice chain, holds the H/P composition fixed, optimizes target H-H contacts with `neal` or `tabu`, then re-folds each candidate before reporting exact target-shape recovery. JSON and CSV exports retain the local configuration, seed, provenance, and software version. This follows the two-stage sequence-search/re-folding strategy in Irbäck et al., *Using quantum annealing to design lattice proteins*, Phys. Rev. Research 6, 013162 (2024), [DOI: 10.1103/PhysRevResearch.6.013162](https://doi.org/10.1103/PhysRevResearch.6.013162).
 
 ## Project documentation
 
