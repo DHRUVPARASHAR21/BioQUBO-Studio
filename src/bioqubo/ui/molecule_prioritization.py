@@ -1,6 +1,7 @@
 """Local molecule-prioritization page."""
 
 from __future__ import annotations
+
 import csv
 import json
 from io import StringIO
