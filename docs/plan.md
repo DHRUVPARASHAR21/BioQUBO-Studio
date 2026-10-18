@@ -8,6 +8,8 @@ Implementation begins only after approval of this plan.
 - Define immutable provenance/result schemas and common validation interfaces.
 - Verify a clean local install and offline sample execution.
 
+**Status: completed 18 October 2026.** The foundation includes a Streamlit entry point, local Ocean SDK dependencies, immutable provenance/result models, a bundled non-biological offline fixture, unit tests, linting, wheel-content verification, and a headless app startup check.
+
 Proposed modules: `src/bioqubo/provenance.py`, `src/bioqubo/models.py`, `tests/`.
 
 ## Milestone 1 — HP lattice folding

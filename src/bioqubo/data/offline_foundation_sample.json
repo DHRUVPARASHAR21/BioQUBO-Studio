@@ -1,0 +1,7 @@
+{
+  "id": "offline-foundation-v1",
+  "checksum": "sha256:foundation-fixture-v1",
+  "message": "Bundled offline foundation sample loaded successfully.",
+  "record_count": 1,
+  "random_seed": 2026
+}

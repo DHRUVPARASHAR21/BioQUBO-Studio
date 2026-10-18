@@ -29,4 +29,20 @@ The repository is public and application source is licensed under MIT. Preserve 
 
 ## Commands
 
-Commands will be added once the project is initialized. Do not install dependencies or scaffold application code until the planning artifacts are approved.
+Create and activate a virtual environment before working locally:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -e ".[dev]"
+```
+
+Run quality checks:
+
+```powershell
+python -m pytest
+ruff check .
+python -m bioqubo.offline_demo
+streamlit run app.py
+```
