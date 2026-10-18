@@ -4,10 +4,12 @@ from __future__ import annotations
 import csv
 import json
 from io import StringIO
+
 import streamlit as st
+
 from bioqubo.chemistry import filter_molecules, parse_smiles_lines
-from bioqubo.molecule_selection_bqm import build_molecule_selection_bqm, solve_molecule_selection
 from bioqubo.models import ResultEnvelope, ResultStatus
+from bioqubo.molecule_selection_bqm import build_molecule_selection_bqm, solve_molecule_selection
 from bioqubo.offline_demo import software_version
 from bioqubo.provenance import DataProvenance, SourceKind
 
@@ -15,7 +17,8 @@ from bioqubo.provenance import DataProvenance, SourceKind
 def render_molecule_prioritization_page() -> None:
     st.header("Molecular-library prioritization")
     st.warning(
-        "This is local chemical prioritization only—not docking, binding-affinity prediction, efficacy assessment, or clinical advice."
+        "This is local chemical prioritization only—not docking, binding-affinity prediction, "
+        "efficacy assessment, or clinical advice."
     )
     text = st.text_area(
         "SMILES and optional identifier", "CCO ethanol\nc1ccccc1 benzene\nCCCC butane"
@@ -50,7 +53,8 @@ def render_molecule_prioritization_page() -> None:
         for m in eligible
     ]
     st.success(
-        f"Selected {len(selected)} locally prioritised molecules from {len(eligible)} eligible inputs."
+        f"Selected {len(selected)} locally prioritised molecules from {len(eligible)} "
+        "eligible inputs."
     )
     st.dataframe(rows, hide_index=True, width="stretch")
     envelope = ResultEnvelope(

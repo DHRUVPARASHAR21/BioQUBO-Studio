@@ -7,8 +7,8 @@ import streamlit as st
 from bioqubo.offline_demo import run_offline_check
 from bioqubo.ui.folding import render_folding_page
 from bioqubo.ui.inverse_design import render_inverse_design_page
-from bioqubo.ui.protein_inputs import render_protein_inputs_page
 from bioqubo.ui.molecule_prioritization import render_molecule_prioritization_page
+from bioqubo.ui.protein_inputs import render_protein_inputs_page
 
 st.set_page_config(page_title="BioQUBO Studio", page_icon="🧬", layout="wide")
 
@@ -29,7 +29,13 @@ with right:
     )
 
 inputs_tab, folding_tab, design_tab, molecule_tab, foundation_tab = st.tabs(
-    ["Protein inputs", "HP lattice folding", "Inverse HP design", "Molecule prioritization", "Foundation check"]
+    [
+        "Protein inputs",
+        "HP lattice folding",
+        "Inverse HP design",
+        "Molecule prioritization",
+        "Foundation check",
+    ]
 )
 with inputs_tab:
     render_protein_inputs_page()
