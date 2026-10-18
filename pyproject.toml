@@ -21,11 +21,11 @@ dependencies = [
     "dimod>=0.12",
     "dwave-neal>=0.6",
     "dwave-tabu>=0.5",
+    "biopython>=1.85",
 ]
 
 [project.optional-dependencies]
 biology = [
-    "biopython>=1.85",
     "rdkit>=2024.9",
 ]
 dev = [

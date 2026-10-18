@@ -7,11 +7,12 @@ import streamlit as st
 from bioqubo.offline_demo import run_offline_check
 from bioqubo.ui.folding import render_folding_page
 from bioqubo.ui.inverse_design import render_inverse_design_page
+from bioqubo.ui.protein_inputs import render_protein_inputs_page
 
 st.set_page_config(page_title="BioQUBO Studio", page_icon="🧬", layout="wide")
 
 st.title("BioQUBO Studio")
-st.caption("Local-first computational-biology optimization — Milestone 2")
+st.caption("Local-first computational-biology optimization — Milestone 3 input layer")
 
 st.info("No cloud QPU, credentials, or network connection is needed for the available workflows.")
 
@@ -26,9 +27,11 @@ with right:
         "They will not provide docking, affinity, efficacy, or clinical claims."
     )
 
-folding_tab, design_tab, foundation_tab = st.tabs(
-    ["HP lattice folding", "Inverse HP design", "Foundation check"]
+inputs_tab, folding_tab, design_tab, foundation_tab = st.tabs(
+    ["Protein inputs", "HP lattice folding", "Inverse HP design", "Foundation check"]
 )
+with inputs_tab:
+    render_protein_inputs_page()
 with folding_tab:
     render_folding_page()
 with design_tab:

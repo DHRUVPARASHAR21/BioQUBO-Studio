@@ -43,6 +43,10 @@ evidence, reproducible JSON/CSV exports, and a Streamlit design page.
 
 Proposed modules: `io/fasta.py`, `io/structure.py`, `fetch/uniprot.py`, `fetch/rcsb.py`, `residue_network.py`, `residue_selection_bqm.py`.
 
+**Status: input layer in progress 18 October 2026.** Offline FASTA and PDB/mmCIF parsing,
+local provenance, and input summaries are available. Residue-network optimization and optional
+explicit retrieval remain outstanding.
+
 ## Milestone 4 — Molecular-library workflow
 
 - Add SMILES/CSV/SDF import via RDKit and descriptor/fingerprint calculation.

@@ -2,7 +2,11 @@
 
 BioQUBO Studio is a free, local-first computational-biology optimization workbench built with D-Wave's Ocean SDK and local solvers.
 
-> **Status: Milestone 2 HP lattice folding and inverse design.** This version adds local 2D HP-model folding and target-fold sequence-design experiments. It does not provide atomistic protein-structure prediction, real-protein design, structure analysis, molecular prioritization, docking, affinity prediction, efficacy prediction, or clinical decision support.
+> **Status: Milestone 3 input layer in progress.** This version adds local FASTA and PDB/mmCIF input validation alongside the 2D HP-model folding and inverse-design experiments. It does not provide atomistic protein-structure prediction, real-protein design, molecular prioritization, docking, affinity prediction, efficacy prediction, or clinical decision support.
+
+## Local protein inputs
+
+The **Protein inputs** page accepts local UTF-8 FASTA, PDB, and mmCIF files. It validates sequences, retains first-model standard residues with alpha-carbon coordinates, and records a SHA-256 checksum in local provenance. It does not send file contents over the network.
 
 ## Principles
 
