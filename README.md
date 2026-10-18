@@ -2,7 +2,7 @@
 
 BioQUBO Studio is a free, local-first computational-biology optimization workbench built with D-Wave's Ocean SDK and local solvers.
 
-> **Status: Milestone 3 input layer in progress.** This version adds local FASTA and PDB/mmCIF input validation alongside the 2D HP-model folding and inverse-design experiments. It does not provide atomistic protein-structure prediction, real-protein design, molecular prioritization, docking, affinity prediction, efficacy prediction, or clinical decision support.
+> **Status: Milestone 4 core workflow complete; release readiness in progress.** This version adds local FASTA/PDB/mmCIF inspection, 2D HP-model folding, inverse design, and SMILES-based molecular-library prioritization. It does not provide atomistic protein-structure prediction, real-protein design, docking, affinity prediction, efficacy prediction, or clinical decision support.
 
 ## Local protein inputs
 
@@ -51,6 +51,12 @@ The folding page accepts `H`/`P` sequences (or a one-record FASTA-like input), c
 ## Inverse HP design
 
 The inverse-design page accepts a valid target lattice chain, holds the H/P composition fixed, optimizes target H-H contacts with `neal` or `tabu`, then re-folds each candidate before reporting exact target-shape recovery. JSON and CSV exports retain the local configuration, seed, provenance, and software version. This follows the two-stage sequence-search/re-folding strategy in Irbäck et al., *Using quantum annealing to design lattice proteins*, Phys. Rev. Research 6, 013162 (2024), [DOI: 10.1103/PhysRevResearch.6.013162](https://doi.org/10.1103/PhysRevResearch.6.013162).
+
+## Molecular-library prioritization
+
+The **Molecule prioritization** page accepts a small, locally entered SMILES library with optional identifiers. It calculates local descriptors, applies molecular-weight and logP filters, and uses a fixed-size diversity-aware BQM solved by `neal` or `tabu` to select a shortlist. The page displays all eligible inputs and provides JSON/CSV result downloads with solver configuration and local provenance.
+
+This workflow is a transparent library-prioritization experiment. It is not molecular docking, binding-affinity prediction, efficacy assessment, or clinical advice. CSV/SDF library import and an attributed bundled ChEMBL demonstration set remain planned release-completion work.
 
 ## Project documentation
 

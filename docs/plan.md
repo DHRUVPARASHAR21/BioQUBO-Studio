@@ -55,6 +55,11 @@ available. Optional explicit UniProt/RCSB retrieval remains deferred so default 
 
 Proposed modules: `io/molecules.py`, `chemistry.py`, `molecule_selection_bqm.py`, `visualization/molecules.py`.
 
+**Status: core workflow completed 18 October 2026.** Local SMILES entry, descriptor calculation,
+property filtering, fixed-cardinality diversity selection, local `neal`/`tabu` solving, and
+JSON/CSV result downloads are available. CSV/SDF import and the attributed ChEMBL example set remain
+release-completion work.
+
 ## Milestone 5 — Product integration and release readiness
 
 - Build Streamlit pages for the four workflows and a shared result-history/export view.
