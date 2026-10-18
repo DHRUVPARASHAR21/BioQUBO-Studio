@@ -70,9 +70,10 @@ Proposed modules: `app.py`, `ui/`, `docs/`, `tests/integration/`.
 
 **Status: in progress 18 October 2026.** Integrated headless app smoke coverage,
 reproducible workflow exports, a local session result-history/export view, and
-release-readiness documentation are in place. Wheel-install verification is
-part of the final local release commands; manual browser/accessibility review
-remains before a public binary release.
+release-readiness documentation are in place. Keyboard and compact-viewport
+browser checks are recorded; wheel-install verification is part of the final
+local release commands. A real screen-reader review remains before a public
+binary release.
 
 ## Verification strategy
 

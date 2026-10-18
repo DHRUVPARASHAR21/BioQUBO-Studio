@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from importlib.resources import files
+from pathlib import Path
 
 import pytest
 
@@ -23,20 +24,8 @@ def test_csv_without_smiles_column_is_rejected() -> None:
 
 
 def test_sdf_import_uses_title_as_identifier() -> None:
-    data = b"""ethanol
-  RDKit          2D
-
-  3  2  0  0  0  0  0  0  0  0999 V2000
-    0.0000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
-    1.5000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
-    2.0000    1.0000    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
-  1  2  1  0
-  2  3  1  0
-M  END
-$$$$
-"""
-
-    library = parse_sdf_library(data, "test.sdf")
+    data = Path(__file__).parent / "fixtures" / "ethanol.sdf"
+    library = parse_sdf_library(data.read_bytes(), data.name)
 
     assert library.molecules[0].identifier == "ethanol"
     assert library.molecules[0].smiles == "CCO"

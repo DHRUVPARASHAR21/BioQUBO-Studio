@@ -25,15 +25,31 @@ network connection during normal workflows.
 | Residue selection | Fixed-size, independently scored local contact-network selection with source-file provenance JSON/CSV export | Residue-selection and export tests |
 | Molecule prioritization | Valid local SMILES/CSV/SDF, filtered fixed-size diverse shortlist, and attributed offline demo | Chemistry, import, shortlist, and export tests |
 
+## Browser QA evidence — 2026-10-18
+
+- **Keyboard:** the visible Skip-to-main-content link receives initial focus;
+  subsequent Tab navigation reaches the application controls. The Streamlit
+  accessibility tree exposes labelled workflow tabs, comboboxes, inputs, and
+  upload controls.
+- **Compact viewport:** at `375 × 812`, the Molecular prioritization tab and
+  bundled HIV-1 protease teaching workflow complete successfully with no
+  document-level horizontal overflow (`scrollWidth == innerWidth`).
+- **Library input:** new integrated Streamlit tests upload a CSV and an SDF,
+  run each through local prioritization, and assert a successful result.
+- **Exports:** the completed workflow exposes paired JSON and CSV download
+  controls in the integrated app test. Content serialization is independently
+  covered by the export tests.
+
 ## Known limitations
 
 - Results are research/teaching aids: HP folds are not atomistic predictions;
   molecule shortlists are not docking, affinity, efficacy, or clinical results.
 - Default workflows are local. Optional remote retrieval is intentionally not
   included in this release.
-- A keyboard/screen-reader review and a small-viewport review remain required
-  before distributing a public binary release. A wheel-install smoke check is
-  part of the release commands below.
+- An assistive-technology review with a real screen reader remains required
+  before distributing a public binary release. Keyboard and compact-viewport
+  browser checks are recorded above. A wheel-install smoke check is part of the
+  release commands below.
 
 ## Final local release commands
 
