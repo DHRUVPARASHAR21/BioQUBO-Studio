@@ -28,7 +28,7 @@ def render_molecule_prioritization_page() -> None:
     max_weight = cols[0].number_input("Max molecular weight", 1.0, 2000.0, 500.0)
     max_logp = cols[1].number_input("Max logP", -10.0, 20.0, 5.0)
     size = cols[2].number_input("Shortlist size", 1, 20, 2)
-    solver = cols[3].selectbox("Local solver", ["neal", "tabu"])
+    solver = cols[3].selectbox("Local solver", ["neal", "tabu"], key="molecule_solver")
     if not st.button("Prioritize locally", type="primary"):
         return
     try:
