@@ -79,5 +79,5 @@ Proposed modules: `app.py`, `ui/`, `docs/`, `tests/integration/`.
 
 1. **Approved:** working name **BioQUBO Studio**.
 2. **Approved:** local Streamlit is the first delivery format.
-3. **Approved:** repository will be public. **Pending:** choose a software license.
+3. **Approved:** repository will be public under the **MIT License**.
 4. **Approved:** bundle a small HIV-1 protease demonstration based on RCSB PDB entry `1HSG` and an attributed ChEMBL-derived molecule subset. Keep data attribution/licensing separate from application-source licensing.

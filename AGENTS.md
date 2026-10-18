@@ -4,7 +4,7 @@
 
 Build a free, local-first computational-biology optimization application using D-Wave Ocean SDK models and local solvers. Read `docs/intent.md`, `docs/spec.md`, and `docs/plan.md` before implementation work.
 
-The repository is intended to be public. Do not add a license file until the project owner chooses one.
+The repository is public and application source is licensed under MIT. Preserve separate attribution and licensing for bundled third-party data.
 
 ## Required boundaries
 

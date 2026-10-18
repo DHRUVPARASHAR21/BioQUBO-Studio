@@ -39,11 +39,11 @@ A local-first desktop web application that imports public biological data or loc
 - Working name: **BioQUBO Studio**.
 - Initial delivery is a local Streamlit application for Windows/Python users.
 - The source repository will be public.
+- Application source is licensed under the MIT License. Bundled third-party data keeps its own attribution and license terms.
 - Online retrieval is optional; users can instead upload previously downloaded public files.
 - Public-source integrations will target UniProt (FASTA), RCSB PDB (PDB/mmCIF), and user-selected ChEMBL exports rather than bulk-downloading entire databases.
 - The first bundled demonstration will use HIV-1 protease, RCSB PDB entry `1HSG`, with a small separately licensed, attributed ChEMBL-derived compound subset.
 
 ## Open questions
 
-- Preferred open-source license for the public repository.
 - Whether UI language, branding, or a university rubric imposes requirements.
