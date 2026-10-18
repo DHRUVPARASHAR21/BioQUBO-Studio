@@ -63,6 +63,10 @@ Proposed modules: `io/molecules.py`, `chemistry.py`, `molecule_selection_bqm.py`
 
 Proposed modules: `app.py`, `ui/`, `docs/`, `tests/integration/`.
 
+**Status: in progress 18 October 2026.** Integrated headless app smoke coverage and
+release-readiness documentation are in place; manual browser/accessibility and packaged-install
+checks remain before a public binary release.
+
 ## Verification strategy
 
 - Unit tests: parsers, energy functions, BQM constraint terms, provenance serialization.

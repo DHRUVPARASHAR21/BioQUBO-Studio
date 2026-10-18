@@ -57,6 +57,7 @@ The inverse-design page accepts a valid target lattice chain, holds the H/P comp
 - [`docs/intent.md`](docs/intent.md): why the product exists and its boundaries.
 - [`docs/spec.md`](docs/spec.md): user-facing requirements and acceptance criteria.
 - [`docs/plan.md`](docs/plan.md): milestone plan and verification strategy.
+- [`docs/release-readiness.md`](docs/release-readiness.md): local release gates and limitations.
 
 ## License
 
