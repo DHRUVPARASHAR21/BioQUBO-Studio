@@ -22,12 +22,11 @@ dependencies = [
     "dwave-neal>=0.6",
     "dwave-tabu>=0.5",
     "biopython>=1.85",
+    "rdkit>=2024.9",
 ]
 
 [project.optional-dependencies]
-biology = [
-    "rdkit>=2024.9",
-]
+biology = []
 dev = [
     "pytest>=8.3",
     "ruff>=0.8",
