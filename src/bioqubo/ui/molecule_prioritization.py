@@ -2,10 +2,6 @@
 
 from __future__ import annotations
 
-import csv
-import json
-from io import StringIO
-
 import streamlit as st
 
 from bioqubo.chemistry import filter_molecules, parse_smiles_lines
@@ -13,6 +9,7 @@ from bioqubo.models import ResultEnvelope, ResultStatus
 from bioqubo.molecule_selection_bqm import build_molecule_selection_bqm, solve_molecule_selection
 from bioqubo.offline_demo import software_version
 from bioqubo.provenance import DataProvenance, SourceKind
+from bioqubo.ui.result_history import record_result
 
 
 def render_molecule_prioritization_page() -> None:
@@ -78,15 +75,17 @@ def render_molecule_prioritization_page() -> None:
         random_seed=123,
         software_version=software_version(),
     )
-    out = StringIO()
-    writer = csv.DictWriter(out, fieldnames=list(rows[0]))
-    writer.writeheader()
-    writer.writerows(rows)
+    history_entry = record_result(envelope, rows, "bioqubo_molecule_priority")
     a, b = st.columns(2)
     a.download_button(
         "Download JSON",
-        json.dumps(envelope.to_dict(), indent=2),
+        history_entry.exports.json_text,
         "bioqubo_molecule_priority.json",
         "application/json",
     )
-    b.download_button("Download CSV", out.getvalue(), "bioqubo_molecule_priority.csv", "text/csv")
+    b.download_button(
+        "Download CSV",
+        history_entry.exports.csv_text,
+        "bioqubo_molecule_priority.csv",
+        "text/csv",
+    )

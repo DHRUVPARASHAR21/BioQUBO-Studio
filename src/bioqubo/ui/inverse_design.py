@@ -2,10 +2,6 @@
 
 from __future__ import annotations
 
-import csv
-import json
-from io import StringIO
-
 import streamlit as st
 
 from bioqubo.fold_energy import ContactEvaluation
@@ -19,22 +15,13 @@ from bioqubo.models import ResultEnvelope, ResultStatus
 from bioqubo.offline_demo import software_version
 from bioqubo.provenance import DataProvenance, SourceKind
 from bioqubo.target_fold import TargetFold, parse_target_coordinates
+from bioqubo.ui.result_history import record_result
 from bioqubo.visualization.fold import fold_svg
 
 DEFAULT_TARGET = """0, 0
 1, 0
 1, 1
 0, 1"""
-
-
-def _csv_export(rows: list[dict[str, object]]) -> str:
-    output = StringIO()
-    writer = csv.DictWriter(output, fieldnames=list(rows[0]))
-    writer.writeheader()
-    writer.writerows(rows)
-    return output.getvalue()
-
-
 def render_inverse_design_page() -> None:
     """Render the two-stage sequence-design and local re-folding workflow."""
 
@@ -135,16 +122,17 @@ def render_inverse_design_page() -> None:
         random_seed=int(seed),
         software_version=software_version(),
     )
+    history_entry = record_result(result, rows, "bioqubo_inverse_design")
     export_columns = st.columns(2)
     export_columns[0].download_button(
         "Download result JSON",
-        data=json.dumps(result.to_dict(), indent=2),
+        data=history_entry.exports.json_text,
         file_name="bioqubo_inverse_design.json",
         mime="application/json",
     )
     export_columns[1].download_button(
         "Download candidate CSV",
-        data=_csv_export(rows),
+        data=history_entry.exports.csv_text,
         file_name="bioqubo_inverse_design_candidates.csv",
         mime="text/csv",
     )

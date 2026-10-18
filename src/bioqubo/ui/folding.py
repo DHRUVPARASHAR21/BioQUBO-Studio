@@ -6,13 +6,13 @@ import hashlib
 
 import streamlit as st
 
-from bioqubo.exports import build_result_exports
 from bioqubo.folding_bqm import LatticeBounds, build_folding_bqm
 from bioqubo.hp_model import HPSequenceError, parse_hp_sequence
 from bioqubo.models import ResultEnvelope, ResultStatus
 from bioqubo.offline_demo import software_version
 from bioqubo.provenance import DataProvenance, SourceKind
 from bioqubo.solvers import solve_folding
+from bioqubo.ui.result_history import record_result
 from bioqubo.visualization.fold import fold_svg
 
 
@@ -123,17 +123,17 @@ def render_folding_page() -> None:
                 zip(sequence.residues, result.chain.coordinates, strict=True)
             )
         ]
-        exports = build_result_exports(envelope, rows)
+        history_entry = record_result(envelope, rows, "bioqubo_hp_folding")
         json_column, csv_column = st.columns(2)
         json_column.download_button(
             "Download result JSON",
-            data=exports.json_text,
+            data=history_entry.exports.json_text,
             file_name="bioqubo_hp_folding.json",
             mime="application/json",
         )
         csv_column.download_button(
             "Download coordinates CSV",
-            data=exports.csv_text,
+            data=history_entry.exports.csv_text,
             file_name="bioqubo_hp_folding.csv",
             mime="text/csv",
         )

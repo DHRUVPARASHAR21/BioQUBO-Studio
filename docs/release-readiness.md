@@ -36,13 +36,14 @@ network connection during normal workflows.
 
 ## Export evidence
 
-HP-folding and residue-network-selection downloads are paired JSON and CSV
-artifacts. The JSON artifact is the complete result envelope. The CSV repeats
-the schema version, workflow status, timestamp, software version, random seed,
-and canonical JSON provenance, configuration, and payload fields on every
-data row so it remains reproducible when separated from the JSON artifact.
-The payload retains the independently evaluated result and the applicable
-coarse-grained or non-clinical limitation.
+All completed workflow downloads are paired JSON and CSV artifacts, also
+available again through the current session's local Result history tab. The JSON
+artifact is the complete result envelope. The CSV repeats the schema version,
+workflow status, timestamp, software version, random seed, and canonical JSON
+provenance, configuration, and payload fields on every data row so it remains
+reproducible when separated from the JSON artifact. The payload retains the
+independently evaluated result and the applicable coarse-grained or
+non-clinical limitation.
 
 ## Rollback
 

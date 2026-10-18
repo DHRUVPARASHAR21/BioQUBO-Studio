@@ -4,13 +4,13 @@ from __future__ import annotations
 
 import streamlit as st
 
-from bioqubo.exports import build_result_exports
 from bioqubo.io.fasta import parse_fasta_text
 from bioqubo.io.structure import parse_structure_text
 from bioqubo.models import ResultEnvelope, ResultStatus
 from bioqubo.offline_demo import software_version
 from bioqubo.residue_network import build_residue_network
 from bioqubo.residue_selection_bqm import build_residue_selection_bqm, solve_residue_selection
+from bioqubo.ui.result_history import record_result
 
 
 def render_protein_inputs_page() -> None:
@@ -144,17 +144,19 @@ def render_protein_inputs_page() -> None:
                             random_seed=int(seed),
                             software_version=software_version(),
                         )
-                        exports = build_result_exports(envelope, rows)
+                        history_entry = record_result(
+                            envelope, rows, "bioqubo_residue_selection"
+                        )
                         json_column, csv_column = st.columns(2)
                         json_column.download_button(
                             "Download selection JSON",
-                            data=exports.json_text,
+                            data=history_entry.exports.json_text,
                             file_name="bioqubo_residue_selection.json",
                             mime="application/json",
                         )
                         csv_column.download_button(
                             "Download selected residues CSV",
-                            data=exports.csv_text,
+                            data=history_entry.exports.csv_text,
                             file_name="bioqubo_residue_selection.csv",
                             mime="text/csv",
                         )

@@ -22,6 +22,7 @@ def test_app_loads_all_local_workflow_tabs_without_exceptions() -> None:
         "HP lattice folding",
         "Inverse HP design",
         "Molecule prioritization",
+        "Result history",
         "Foundation check",
     ]
 

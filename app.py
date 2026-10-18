@@ -9,6 +9,7 @@ from bioqubo.ui.folding import render_folding_page
 from bioqubo.ui.inverse_design import render_inverse_design_page
 from bioqubo.ui.molecule_prioritization import render_molecule_prioritization_page
 from bioqubo.ui.protein_inputs import render_protein_inputs_page
+from bioqubo.ui.result_history import render_result_history_page
 
 st.set_page_config(page_title="BioQUBO Studio", page_icon="🧬", layout="wide")
 
@@ -28,12 +29,13 @@ with right:
         "They will not provide docking, affinity, efficacy, or clinical claims."
     )
 
-inputs_tab, folding_tab, design_tab, molecule_tab, foundation_tab = st.tabs(
+inputs_tab, folding_tab, design_tab, molecule_tab, history_tab, foundation_tab = st.tabs(
     [
         "Protein inputs",
         "HP lattice folding",
         "Inverse HP design",
         "Molecule prioritization",
+        "Result history",
         "Foundation check",
     ]
 )
@@ -45,6 +47,8 @@ with design_tab:
     render_inverse_design_page()
 with molecule_tab:
     render_molecule_prioritization_page()
+with history_tab:
+    render_result_history_page()
 with foundation_tab:
     st.subheader("Offline foundation check")
     st.write("Load the bundled example and create a reproducible result envelope.")
