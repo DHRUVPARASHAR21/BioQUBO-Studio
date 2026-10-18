@@ -72,8 +72,8 @@ Proposed modules: `app.py`, `ui/`, `docs/`, `tests/integration/`.
 reproducible workflow exports, a local session result-history/export view, and
 release-readiness documentation are in place. Keyboard and compact-viewport
 browser checks are recorded; wheel-install verification is part of the final
-local release commands. A real screen-reader review remains before a public
-binary release.
+local release commands. A real screen-reader audio review is deferred from the
+v0.1.0 source release.
 
 ## Verification strategy
 

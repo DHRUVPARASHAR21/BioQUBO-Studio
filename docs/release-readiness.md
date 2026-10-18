@@ -46,10 +46,10 @@ network connection during normal workflows.
   molecule shortlists are not docking, affinity, efficacy, or clinical results.
 - Default workflows are local. Optional remote retrieval is intentionally not
   included in this release.
-- An assistive-technology review with a real screen reader remains required
-  before distributing a public binary release. Keyboard and compact-viewport
-  browser checks are recorded above. A wheel-install smoke check is part of the
-  release commands below.
+- A real screen-reader audio review is intentionally deferred from the v0.1.0
+  source release. Keyboard, labelled-control, and compact-viewport browser
+  checks are recorded above. A wheel-install smoke check is part of the release
+  commands below.
 
 ## Final local release commands
 
